@@ -305,7 +305,10 @@ code --version
 у репозиторій викладача:
 
 1. Склонуйте репозиторій курсу (тільки для читання):
-   `git clone git@github.com:<instructor>/<course-repo>.git`.
+   ```bash
+   git clone git@github.com:robot-dreams-code/UA_DATA-ENGINEERING_KHOROSHYKH-2-hw.git
+   ```
+   (репозиторій на GitHub: https://github.com/robot-dreams-code/UA_DATA-ENGINEERING_KHOROSHYKH-2-hw/tree/main)
 2. Створіть **свій власний порожній** репозиторій на GitHub:
    - відкрийте **https://github.com/new**;
    - введіть назву репозиторію (наприклад, `de-course-homework`);
@@ -331,7 +334,7 @@ code --version
 4. Додайте репозиторій курсу як **`upstream`** — так ви зможете підтягувати
    нові заняття (нові файли й папки), які викладач додає новими комітами:
    ```bash
-   git remote add upstream git@github.com:<instructor>/<course-repo>.git
+   git remote add upstream git@github.com:robot-dreams-code/UA_DATA-ENGINEERING_KHOROSHYKH-2-hw.git
    ```
    Перед початком роботи над кожним новим заняттям підтягніть свіжий контент —
    **обов'язково з гілки `main`**, а не з гілки домашки:
