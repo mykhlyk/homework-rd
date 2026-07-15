@@ -38,3 +38,12 @@ lecturer_knowledge.md
 demo.md
 demo-*.md
 presentation/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Notebook is the source of truth in these dirs: don't track the paired/plain .py files
+lesson-02-python/code/*.py
+lesson-03-sql/code/*.py
+lesson-12-spark-structured-data-1/code/*.py
+lesson-14-data-quality/code/*.py
