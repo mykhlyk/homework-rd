@@ -1,0 +1,15 @@
+[project]
+name = "lesson-02-homework"
+version = "0.1.0"
+description = "L02 homework — GitHub Archive ETL pipeline (Polars)"
+requires-python = "==3.12.*"
+dependencies = [
+  "polars>=1.40.1",
+  "pyarrow>=24.0.0",
+]
+
+[dependency-groups]
+dev = ["pytest>=8.3.0"]
+
+[tool.uv]
+package = false

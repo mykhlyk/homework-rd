@@ -1,0 +1,40 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.python-version
+
+
+# Virtual environments
+.venv
+
+.obsidian/
+.vscode/
+.DS_Store
+
+# DuckDB databases (regenerable, large)
+*.duckdb
+*.duckdb.wal
+
+# SQLite databases (demo artifacts)
+*.sqlite
+
+# dlt pipeline state directories
+*_el/
+*_pipeline/
+
+# dbt build artifacts
+target/
+logs/
+.user.yml
+dbt_packages/
+
+# Instructor-only materials
+solution/
+lecturer_knowledge.md
+demo.md
+demo-*.md
+presentation/
