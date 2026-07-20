@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: bronze_yellow_trips
+    description: >
+      Типізована Bronze-таблиця. Явні CAST для всіх колонок.
+      Відповідає DDL із ноутбука (секція 3), але без CHECK-обмежень —
+      DQ-фільтрація відбувається у stg_yellow_trips.
+    columns:
+      - name: tpep_pickup_datetime
+        description: "Час початку поїздки"
+        tests:
+          - not_null
+      - name: tpep_dropoff_datetime
+        description: "Час завершення поїздки"
+        tests:
+          - not_null
+      - name: pu_location_id
+        description: "ID зони відправлення"
+        tests:
+          - not_null
+      - name: do_location_id
+        description: "ID зони прибуття"
+        tests:
+          - not_null
+      - name: payment_type
+        description: "Тип оплати (0=невизначений, 1=картка, 2=готівка, 3=без оплати, 4=суперечка)"
+        tests:
+          - accepted_values:
+              values: [0, 1, 2, 3, 4]
+
+  - name: stg_yellow_trips
+    description: >
+      Silver view — відфільтровані поїздки (fare_amount >= 0, trip_distance >= 0).
+      Використовується як вхід для аналітичних моделей.
+    columns:
+      - name: pu_location_id
+        description: "ID зони відправлення — має бути у довіднику зон"
+        tests:
+          - relationships:
+              to: ref('taxi_zone_lookup')
+              field: LocationID
+              config:
+                severity: warn
+
+  - name: zone_revenue
+    description: >
+      Аналітична таблиця: виручка по зонах із window functions.
+      Агрегує stg → join з довідником → cumulative revenue + rank у borough.

@@ -1,0 +1,52 @@
+version: 2
+
+models:
+  - name: stg_events
+    description: "Чистий шар поверх сирих GitHub-подій; DQ-фільтри прибирають шум (боти, не-цільові типи, порожні push)."
+    columns:
+      - name: id
+        tests: [not_null, unique]
+      - name: event_type
+        tests:
+          - accepted_values:
+              values: ['PushEvent', 'IssuesEvent', 'PullRequestEvent', 'WatchEvent', 'IssueCommentEvent']
+
+  - name: repo_top_events
+    description: "TOP-5 репозиторіїв за кількістю подій на кожен event_type."
+    columns:
+      - name: event_count
+        tests: [not_null]
+      - name: type_rank
+        tests:
+          - accepted_values:
+              values: [1, 2, 3, 4, 5]
+
+  - name: daily_activity
+    description: "Кількість подій по днях + накопичувальний підсумок."
+    columns:
+      - name: event_date
+        tests: [not_null, unique]
+
+  - name: daily_activity_change
+    description: "Зміна кількості подій день-до-дня (LAG)."
+    columns:
+      - name: event_date
+        tests: [not_null, unique]
+
+  - name: starred_repos_without_push
+    description: "Репозиторії зі зіркою, але без жодного push (anti-join)."
+    columns:
+      - name: repo_name
+        tests: [not_null, unique]
+
+  - name: mart_category_daily
+    description: "Широка вітрина: події × категорія × календар, агреговані по дню."
+    columns:
+      - name: events
+        tests: [not_null]
+
+  - name: report_category_week
+    description: "Оптимізована версія тижневого звіту по категоріях."
+    columns:
+      - name: events
+        tests: [not_null]

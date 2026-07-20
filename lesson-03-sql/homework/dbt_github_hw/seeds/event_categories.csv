@@ -1,0 +1,6 @@
+event_type,category,is_write
+PushEvent,code,true
+PullRequestEvent,code,true
+IssuesEvent,issues,true
+IssueCommentEvent,issues,false
+WatchEvent,social,false

@@ -1,0 +1,31 @@
+name: 'dbt_github_hw'
+version: '1.0.0'
+profile: 'dbt_github_hw'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Path to the partitioned GitHub events dataset, relative to the project directory.
+  events_path: "../../data/events/**/*.parquet"
+
+models:
+  dbt_github_hw:
+    +materialized: view
+
+seeds:
+  dbt_github_hw:
+    calendar:
+      +column_types:
+        day: date
+        day_of_week: integer
+        is_weekend: boolean
+        iso_week: integer
+    event_categories:
+      +column_types:
+        event_type: varchar
+        category: varchar
+        is_write: boolean

@@ -1,0 +1,12 @@
+[project]
+name = "lesson-03-homework"
+version = "0.1.0"
+description = "L03 homework — dbt project over GitHub Archive events (DuckDB)"
+requires-python = "==3.12.*"
+dependencies = [
+  "dbt-core>=1.10",
+  "dbt-duckdb>=1.10.1",
+]
+
+[tool.uv]
+package = false
