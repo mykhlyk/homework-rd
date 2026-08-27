@@ -1,0 +1,38 @@
+# Завдання 3 і 4 — стек із двох сервісів. Специфікація: ../SPEC.md → «docker-compose».
+services:
+  # --- Завдання 3: Postgres --------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      # named volume під дані БД — переживає docker compose down
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # --- Завдання 4: ingestor --------------------------------------------------
+  ingestor:
+    build: .                       
+    depends_on:
+      postgres:
+        condition: service_healthy 
+    environment:
+      PGHOST: postgres             
+      PGPORT: 5432
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB}
+      CACHE_DIR: /cache
+      ARCHIVE_URL: ${ARCHIVE_URL}
+    volumes:
+      - ghcache:/cache             
+
+volumes:
+  pgdata:
+  ghcache:
