@@ -1,0 +1,10 @@
+data/output/
+data/checkpoints/
+spark-warehouse/
+__pycache__/
+.pytest_cache/
+*.crc
+
+# артефакти бонусу (bonus_explain.py) — відтворюються прогоном
+plan_union.txt
+plan_onepass.txt
