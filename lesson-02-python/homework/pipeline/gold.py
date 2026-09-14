@@ -66,3 +66,4 @@ def build_push_commits_by_repo(silver: pl.DataFrame) -> pl.DataFrame:
     push_commits.write_parquet(config.GOLD_PUSH_COMMITS)
  
     return push_commits
+

@@ -36,7 +36,6 @@ def build_silver(bronze: pl.DataFrame) -> pl.DataFrame:
         )
         .unique(subset=["event_id"])
     )
-    #print(silver_df)
     silver_df.write_parquet(config.SILVER_FILE)
  
     return silver_df
@@ -46,3 +45,4 @@ def build_silver(bronze: pl.DataFrame) -> pl.DataFrame:
 def write_silver_partitioned(silver: pl.DataFrame) -> None:
     os.makedirs(config.SILVER_PARTITIONED_DIR, exist_ok=True)
     silver.write_parquet(config.SILVER_PARTITIONED_DIR, partition_by="event_type")
+
