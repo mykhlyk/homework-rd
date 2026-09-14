@@ -20,10 +20,8 @@ from __future__ import annotations
 import polars as pl
 
 from . import config
-import os
 
 def build_silver(bronze: pl.DataFrame) -> pl.DataFrame:
-    os.makedirs(os.path.dirname(config.SILVER_FILE), exist_ok=True)
  
     silver_df = (
         bronze
@@ -36,13 +34,12 @@ def build_silver(bronze: pl.DataFrame) -> pl.DataFrame:
         )
         .unique(subset=["event_id"])
     )
-    silver_df.write_parquet(config.SILVER_FILE)
+    silver_df.write_parquet(config.SILVER_FILE, mkdir=True)
  
     return silver_df
  
  
 
 def write_silver_partitioned(silver: pl.DataFrame) -> None:
-    os.makedirs(config.SILVER_PARTITIONED_DIR, exist_ok=True)
-    silver.write_parquet(config.SILVER_PARTITIONED_DIR, partition_by="event_type")
+    silver.write_parquet(config.SILVER_PARTITIONED_DIR, partition_by="event_type", mkdir=True)
 
