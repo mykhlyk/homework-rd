@@ -14,15 +14,15 @@ TODO (Завдання 1): реалізуйте build_bronze().
 
 from __future__ import annotations
 
+from duckdb import df
+from duckdb import df
 import polars as pl
 
 from . import config
 
-import os
 
 
 def build_bronze() -> pl.DataFrame:
-    os.makedirs(os.path.dirname(config.BRONZE_FILE), exist_ok=True)
 
     lf = (
         pl.scan_ndjson(
@@ -53,7 +53,8 @@ def build_bronze() -> pl.DataFrame:
         )
     )
 
-    #print (lf)
     lf.sink_parquet(config.BRONZE_FILE)
+    
+    df.write_parquet(config.BRONZE_FILE, mkdir=True)
 
-    return pl.read_parquet(config.BRONZE_FILE)
+    return df
