@@ -7,7 +7,6 @@ wheels/
 *.egg-info
 .python-version
 
-
 # Virtual environments
 .venv
 
@@ -50,6 +49,12 @@ lesson-02-python/code/*.py
 lesson-03-sql/code/*.py
 lesson-12-spark-structured-data-1/code/*.py
 lesson-14-data-quality/code/*.py
+
+# Data and Spark structured data homework artifacts
+**/data/
+**/*.json.gz
+*.parquet
+
 # Spark walkthrough runtime artifacts (regenerable)
 lesson-15-spark-optimization/code/spark-events/
 derby.log
