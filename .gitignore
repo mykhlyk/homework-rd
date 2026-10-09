@@ -7,13 +7,14 @@ wheels/
 *.egg-info
 .python-version
 
-
 # Virtual environments
 .venv
 
+# Local secrets (.env.example stays tracked)
+.env
+
 .obsidian/
 .vscode/
-<<<<<<< HEAD
 .DS_Store
 
 # DuckDB databases (regenerable, large)
@@ -48,9 +49,13 @@ lesson-02-python/code/*.py
 lesson-03-sql/code/*.py
 lesson-12-spark-structured-data-1/code/*.py
 lesson-14-data-quality/code/*.py
-=======
+
+# Data and Spark structured data homework artifacts
 **/data/
 **/*.json.gz
-*.duckdb
 *.parquet
->>>>>>> ffb7905 (1)
+
+# Spark walkthrough runtime artifacts (regenerable)
+lesson-15-spark-optimization/code/spark-events/
+derby.log
+metastore_db/
